@@ -1,4 +1,4 @@
-# bmi.rs
+# bits.rs
 
 Portable implementation of x86 BMI (Bit Manipulation Instructions)
 
