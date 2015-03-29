@@ -114,7 +114,7 @@ pub mod u64 {
 
     /// Mask from lowest clear bit
     #[inline(always)]
-    pub fn blcmask(src: u64) -> u64 {
+    pub fn blcmsk(src: u64) -> u64 {
         src ^ (src + 1)
     }
 
