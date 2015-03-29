@@ -1,7 +1,7 @@
 #![feature(core)]
 
 pub mod u64 {
-    // ABM
+    // ABM /////////////////////////////////////////////////////////////////////
 
     /// Count leading zero bits
     #[inline(always)]
@@ -68,8 +68,8 @@ pub mod u64 {
     pub fn pdep(val: u64, mut mask: u64) -> u64 {
         let mut res = 0u64;
         let mut bb  = 1u64;
-        while mask != 0 {
-            if val & bb != 0 {
+        while  mask       != 0 {
+            if  val &  bb != 0 {
                 res |= blsi(mask);
             }
                mask  = blsr(mask);
@@ -84,8 +84,8 @@ pub mod u64 {
     pub fn pext(val: u64, mut mask: u64) -> u64 {
         let mut res = 0u64;
         let mut bb  = 1u64;
-        while mask != 0 {
-            if val & blsi(mask) != 0 {
+        while  mask               != 0 {
+            if  val &  blsi(mask) != 0 {
                 res |= bb;
             }
                mask  = blsr(mask);
