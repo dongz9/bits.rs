@@ -44,6 +44,10 @@ The following instructions are implemented:
 * T1MSKC
 * TZMSK
 
+## Documentation
+
+See the API documentation [here](http://freebroccolo.github.io/bmi.rs/doc/bmi/).
+
 ## Requirements
 
 1.   [Rust](http://www.rust-lang.org/)
