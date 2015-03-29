@@ -39,13 +39,13 @@ pub mod u64 {
     /// Get mask up to lowest set bit
     #[inline(always)]
     pub fn blsmsk(src: u64) -> u64 {
-        src ^ (src - 1)
+        src ^ src.wrapping_sub(1)
     }
 
     /// Reset lowest set bit
     #[inline(always)]
     pub fn blsr(src: u64) -> u64 {
-        src & (src - 1)
+        src & src.wrapping_sub(1)
     }
 
     /// Count trailing zero bits
@@ -127,13 +127,13 @@ pub mod u64 {
     /// Fill from lowest set bit
     #[inline(always)]
     pub fn blsfill(src: u64) -> u64 {
-        src | (src - 1)
+        src | src.wrapping_sub(1)
     }
 
     /// Isolate lowest set bit and complement
     #[inline(always)]
     pub fn blsic(src: u64) -> u64 {
-        !src | (src - 1)
+        !src | src.wrapping_sub(1)
     }
 
     /// Inverse mask from trailing ones
@@ -145,6 +145,6 @@ pub mod u64 {
     /// Mask from trailing zeros
     #[inline(always)]
     pub fn tzmsk(src: u64) -> u64 {
-        !src & (src - 1)
+        !src & src.wrapping_sub(1)
     }
 }
