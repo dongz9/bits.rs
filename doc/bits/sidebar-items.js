@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["generic","Generic bit manipulation routines"],["x86","x86 BMI-style bit manipulation routines"]]});

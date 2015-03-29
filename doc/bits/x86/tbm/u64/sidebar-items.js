@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["blcfill","Fill up to lowest 0"],["blci","Get lowest 0"],["blcic","Get lowest 0 and complement word"],["blcmsk","Mask up to lowest 0"],["blcs","Set lowest 0 to 1"],["blsfill","Fill up to lowest 1"],["blsic","Get lowest 1 and complement word"],["t1mskc","Mask trailing 1s and complement word"],["tzmsk","Mask trailing 0s"]]});

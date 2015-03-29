@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["bzhi","Zero high bits from specified position"],["pdep","Parallel bits deposit; scatter bits"],["pext","Parallel bits extract; gather bits"]]});
