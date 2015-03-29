@@ -4,49 +4,15 @@ x86 BMI-style bit manipulation routines
 
 ## Synopsis
 
-This library provides portable implementation of x86 BMI (Bit
-Manipulation Instructions) 1, 2, TBM (Trailing Bit Manipulation
-Instructions), and ABM (Advanced Bit Manipulation Instructions). It
-will (eventually) use machine instructions if available on the native
-architecture.
-
-The following instructions are implemented:
-
-#### ABM
-
-* POPCNT (via Rust intrinsics)
-* LZCNT (via Rust intrinsics)
-
-#### BMI1
-
-* ANDN
-* BEXTR
-* BLSI
-* BLSMSK
-* BLSR
-* TZCNT (via Rust intrinsics)
-
-#### BMI2
-
-* BZHI
-* PDEP
-* PEXT
-
-#### TBM
-
-* BLCFILL
-* BLCI
-* BLCIC
-* BLCMASK
-* BLCS
-* BLSFILL
-* BLSIC
-* T1MSKC
-* TZMSK
+This library provides various bit manipulation routines not available
+in Rust `std`. Currently it is just a portable implementation of the
+x86 ABM, BMI 1/2, and TBM instruction sets but the API may expand in
+the future. The implementation will (eventually) take advantage of
+specialized hardware instructions available on the native platform.
 
 ## Documentation
 
-See the API documentation [here](http://freebroccolo.github.io/bmi.rs/doc/bmi/).
+See the API documentation [here](http://freebroccolo.github.io/bits.rs/doc/bits/).
 
 ## Requirements
 
