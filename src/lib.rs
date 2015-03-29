@@ -63,7 +63,6 @@ pub mod u64 {
     }
 
     /// Parallel bits deposit
-    #[allow(unsigned_negation)]
     #[inline(always)]
     pub fn pdep(val: u64, mut mask: u64) -> u64 {
         let mut res = 0u64;
@@ -79,7 +78,6 @@ pub mod u64 {
     }
 
     /// Parallel bits extract
-    #[allow(unsigned_negation)]
     #[inline(always)]
     pub fn pext(val: u64, mut mask: u64) -> u64 {
         let mut res = 0u64;
