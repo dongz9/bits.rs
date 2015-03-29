@@ -3,3 +3,9 @@
 name = "bits"
 version = "0.0.0"
 authors = ["Darin Morrison <darinmorrison+git@gmail.com>"]
+description = "x86 BMI-style bit manipulation routines"
+documentation = "http://freebroccolo.github.io/bits.rs/doc/bits/"
+keywords = ["x86", "BMI", "binary", "bits", "bitfields"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/freebroccolo/bits.rs"

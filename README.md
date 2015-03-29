@@ -1,6 +1,6 @@
 # bits.rs
 
-Portable implementation of x86 BMI (Bit Manipulation Instructions)
+x86 BMI-style bit manipulation routines
 
 ## Synopsis
 
