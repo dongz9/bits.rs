@@ -151,13 +151,13 @@ pub fn i_get_invert(src: u64) -> u64 {
     !src | src.wrapping_sub(1)
 }
 
-/// Get singleton 1s
+/// Get singleton 1s within outer 0s
 #[inline(always)]
 pub fn i_get_singletons(src: u64) -> u64 {
     src & !((src << 1) | (src >> 1))
 }
 
-/// Get singleton 1s within outer 0s
+/// Get singleton 1s
 #[inline(always)]
 pub fn i_get_singletons_xi(src: u64) -> u64 {
     i_get_singletons(src)
@@ -217,13 +217,13 @@ pub fn o_get_invert(src: u64) -> u64 {
     !src & (src + 1)
 }
 
-/// Get singleton 0s
+/// Get singleton 0s within outer 0s
 #[inline(always)]
 pub fn o_get_singletons(src: u64) -> u64 {
     !src & ((src << 1) & (src >> 1))
 }
 
-/// Get singleton 0s within outer 0s
+/// Get singleton 0s
 #[inline(always)]
 pub fn o_get_singletons_xi(src: u64) -> u64 {
     i_get_singletons(!src)
