@@ -1,12 +1,24 @@
 /// Logical and not
 #[inline(always)]
-pub fn and_not(src1: u64, src2: u64) -> u64 {
+pub fn b_and_not(src1: u64, src2: u64) -> u64 {
     !src1 & src2
+}
+
+/// Get bit block
+#[inline(always)]
+pub fn b_get_block_from(src: u64, start: u32, len: u32) -> u64 {
+    (src >> start) & ((1 << len) - 1)
+}
+
+/// Get bits included in blocks k > 1 count bits of the same parity
+#[inline(always)]
+pub fn b_get_block(src: u64) -> u64 {
+    !b_get_singletons(src)
 }
 
 /// Gather bits
 #[inline(always)]
-pub fn gather(val: u64, mut mask: u64) -> u64 {
+pub fn b_gather(val: u64, mut mask: u64) -> u64 {
     let mut res = 0u64;
     let mut bb  = 1u64;
     while  mask                 != 0 {
@@ -19,15 +31,33 @@ pub fn gather(val: u64, mut mask: u64) -> u64 {
     res
 }
 
-/// Get bit block
+/// Return 0s and 1s on block transitions within outer 0s
 #[inline(always)]
-pub fn block(src: u64, start: u32, len: u32) -> u64 {
-    (src >> start) & ((1 << len) - 1)
+pub fn b_get_border(src: u64) -> u64 {
+    (src ^ (src << 1)) & (src ^ (src >> 1))
+}
+
+/// Get bits bounded on the left and right by bits of the same parity
+#[inline(always)]
+pub fn b_get_interior(src: u64) -> u64 {
+    !b_get_border(src)
+}
+
+/// Get singleton 0s and 1s within outer 0s
+#[inline(always)]
+pub fn b_get_singletons(src: u64) -> u64 {
+    (src ^ (src << 1)) & (src ^ (src >> 1))
+}
+
+/// Get singleton 0s and 1s
+#[inline(always)]
+pub fn b_get_singletons_xi(src: u64) -> u64 {
+    i_get_singletons_xi(src) | o_get_singletons_xi(src)
 }
 
 /// Scatter bits
 #[inline(always)]
-pub fn scatter(val: u64, mut mask: u64) -> u64 {
+pub fn b_scatter(val: u64, mut mask: u64) -> u64 {
     let mut res = 0u64;
     let mut bb  = 1u64;
     while  mask       != 0 {
@@ -42,7 +72,7 @@ pub fn scatter(val: u64, mut mask: u64) -> u64 {
 
 /// Zero high bits from specified position
 #[inline(always)]
-pub fn zero_high_from_pos(src: u64, index: u32) -> u64 {
+pub fn b_zero_high_from_pos(src: u64, index: u32) -> u64 {
     src & ((1 << index) - 1)
 }
 
@@ -65,10 +95,72 @@ pub fn i_get(src: u64) -> u64 {
     src & -src
 }
 
+/// Get 1s included in blocks k > 1 count 1s
+#[inline(always)]
+pub fn i_get_block(src: u64) -> u64 {
+    src & ((src << 1) | (src >> 1))
+}
+
+/// Get 1s bordering blocks of k > 1 count 1s
+#[inline(always)]
+pub fn i_get_block_border(src: u64) -> u64 {
+    src & ((src << 1) ^ (src >> 1))
+}
+
+/// Get 1s to the left of blocks of k > 1 count 1s
+#[inline(always)]
+pub fn i_get_block_border_low(src: u64) -> u64 {
+    let src_shr = src >> 1;
+    (src & ((src << 1) ^ src_shr)) & src_shr
+}
+
+/// Get 1s to the right of blocks of k > 1 count 1s
+#[inline(always)]
+pub fn i_get_block_border_high(src: u64) -> u64 {
+    let src_shl = src << 1;
+    (src & (src_shl ^ (src >> 1))) & src_shl
+}
+
+/// Get 1s bordering 0s
+#[inline(always)]
+pub fn i_get_border(src: u64) -> u64 {
+    src & !((src << 1) & (src >> 1))
+}
+
+/// Get 1s to the right of 0s
+#[inline(always)]
+pub fn i_get_border_high(src: u64) -> u64 {
+    src & (src ^ (src >> 1))
+}
+
+/// Get 1s to the left of 0s
+#[inline(always)]
+pub fn i_get_border_low(src: u64) -> u64 {
+    src & (src ^ (src << 1))
+}
+
+/// Get 1s bounded by 1s on the left and right
+#[inline(always)]
+pub fn i_get_interior(src: u64) -> u64 {
+    src & ((src << 1) & (src >> 1))
+}
+
 /// Get lowest 1 and complement word
 #[inline(always)]
 pub fn i_get_invert(src: u64) -> u64 {
     !src | src.wrapping_sub(1)
+}
+
+/// Get singleton 1s
+#[inline(always)]
+pub fn i_get_singletons(src: u64) -> u64 {
+    src & !((src << 1) | (src >> 1))
+}
+
+/// Get singleton 1s within outer 0s
+#[inline(always)]
+pub fn i_get_singletons_xi(src: u64) -> u64 {
+    i_get_singletons(src)
 }
 
 /// Mask trailing 1s and complement word
@@ -123,6 +215,18 @@ pub fn o_get(src: u64) -> u64 {
 #[inline(always)]
 pub fn o_get_invert(src: u64) -> u64 {
     !src & (src + 1)
+}
+
+/// Get singleton 0s
+#[inline(always)]
+pub fn o_get_singletons(src: u64) -> u64 {
+    !src & ((src << 1) & (src >> 1))
+}
+
+/// Get singleton 0s within outer 0s
+#[inline(always)]
+pub fn o_get_singletons_xi(src: u64) -> u64 {
+    i_get_singletons(!src)
 }
 
 /// Mask up to lowest 0

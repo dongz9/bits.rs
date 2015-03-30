@@ -25,13 +25,13 @@ pub mod bmi1 {
         /// Logical and not
         #[inline(always)]
         pub fn andn(src1: u64, src2: u64) -> u64 {
-            generic::and_not(src1, src2)
+            generic::b_and_not(src1, src2)
         }
 
         /// Get bit block
         #[inline(always)]
         pub fn bextr(src: u64, start: u32, len: u32) -> u64 {
-            generic::block(src, start, len)
+            generic::b_get_block_from(src, start, len)
         }
 
         /// Get lowest 1
@@ -69,19 +69,19 @@ pub mod bmi2 {
         /// Zero high bits from specified position
         #[inline(always)]
         pub fn bzhi(src: u64, index: u32) -> u64 {
-            generic::zero_high_from_pos(src, index)
+            generic::b_zero_high_from_pos(src, index)
         }
 
         /// Parallel bits deposit; scatter bits
         #[inline(always)]
         pub fn pdep(val: u64, mask: u64) -> u64 {
-            generic::scatter(val, mask)
+            generic::b_scatter(val, mask)
         }
 
         /// Parallel bits extract; gather bits
         #[inline(always)]
         pub fn pext(val: u64, mask: u64) -> u64 {
-            generic::gather(val, mask)
+            generic::b_gather(val, mask)
         }
     }
 }
