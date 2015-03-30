@@ -1,7 +1,7 @@
 [package]
 
 name = "bits"
-version = "0.0.0"
+version = "0.0.1"
 authors = ["Darin Morrison <darinmorrison+git@gmail.com>"]
 description = "x86 BMI-style bit manipulation routines"
 documentation = "http://freebroccolo.github.io/bits.rs/doc/bits/"
