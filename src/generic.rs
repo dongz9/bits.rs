@@ -7,14 +7,13 @@ pub fn and_not(src1: u64, src2: u64) -> u64 {
 /// Gather bits
 #[inline(always)]
 pub fn gather(val: u64, mut mask: u64) -> u64 {
-    use x86::bmi1::u64::{blsi, blsr};
     let mut res = 0u64;
     let mut bb  = 1u64;
-    while  mask               != 0 {
-        if  val &  blsi(mask) != 0 {
+    while  mask                 != 0 {
+        if  val &  i_get (mask) != 0 {
             res |= bb;
         }
-           mask  = blsr(mask);
+           mask  = i_flip(mask);
              bb += bb;
     }
     res
@@ -29,14 +28,13 @@ pub fn block(src: u64, start: u32, len: u32) -> u64 {
 /// Scatter bits
 #[inline(always)]
 pub fn scatter(val: u64, mut mask: u64) -> u64 {
-    use x86::bmi1::u64::{blsi, blsr};
     let mut res = 0u64;
     let mut bb  = 1u64;
     while  mask       != 0 {
         if  val &  bb != 0 {
-            res |= blsi(mask);
+            res |= i_get (mask);
         }
-           mask  = blsr(mask);
+           mask  = i_flip(mask);
              bb += bb;
     }
     res
