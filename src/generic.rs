@@ -37,7 +37,7 @@ pub trait BitOps: num::Int {
     /// Return 0s and 1s on block transitions within outer 0s
     #[inline(always)]
     fn b_get_border(self) -> Self {
-        (self ^ (self << 1)) & (self ^ (self >> 1))
+        (self ^ (self << 1)) | (self ^ (self >> 1))
     }
 
     /// Get bits bounded on the left and right by bits of the same parity
